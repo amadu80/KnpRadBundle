@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -65,6 +66,12 @@ class KnpRadExtension extends Extension
             $loader->load('flashes.xml');
         }
         $container->setParameter('knp_rad.decision_manager.id', $config['security']['decision_manager']);
+
+        //if (version_compare(Kernel::VERSION, '2.4', '>=')) {
+        //    $container->setAlias('knp_rad.resource.resolver.resource', 'knp_rad.resource.resolver.resource.expression_language_based');
+        //}
+
+        $container->setAlias('knp_rad.resource.resolver.resource', 'knp_rad.resource.resolver.resource.aggregate');
     }
 
     public function getNamespace()
