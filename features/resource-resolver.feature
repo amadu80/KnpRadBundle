@@ -8,7 +8,7 @@ Feature: Resolve request parameters to their corresponding resources
         """
         <?php namespace App\Controller {
             class FooController {
-                public function indexAction($object) { return ['object' => $object]; }
+                public function indexAction($object) { return ['object' => get_class($object)]; }
                 public function showAction($object) { return ['object' => $object]; }
             }
         }
